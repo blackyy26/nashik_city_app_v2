@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'emergency_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -34,25 +35,35 @@ class _HomeItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: Colors.blue.shade50,
-        borderRadius: BorderRadius.circular(20),
-      ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Icon(icon, size: 50, color: Colors.blue),
-          const SizedBox(height: 10),
-          Text(
-            title,
-            style: const TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
-            ),
+   return InkWell(
+  onTap: () {
+    if (title == 'Emergency') {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const EmergencyScreen(),
+        ),
+      );
+    }
+  },
+  child: Container(
+    decoration: BoxDecoration(
+      color: Colors.blue.shade50,
+      borderRadius: BorderRadius.circular(20),
+    ),
+    child: Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Icon(icon, size: 50, color: Colors.blue),
+        const SizedBox(height: 10),
+        Text(
+          title,
+          style: const TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
           ),
-        ],
-      ),
-    );
-  }
-}
+        ),
+      ],
+    ),
+  ),
+);
