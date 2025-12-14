@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'emergency_screen.dart';
 
 class EmergencyScreen extends StatelessWidget {
   const EmergencyScreen({super.key});
@@ -54,12 +55,15 @@ class _EmergencyTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       margin: const EdgeInsets.only(bottom: 15),
-      child: ListTile(
-        leading: Icon(icon, color: Colors.red),
-        title: Text(title),
-        subtitle: Text('Call $number'),
-        trailing: const Icon(Icons.call),
-      ),
-    );
+      child:ListTile(
+  leading: Icon(icon, color: Colors.red),
+  title: Text(title),
+  subtitle: Text('Call $number'),
+  trailing: const Icon(Icons.call),
+  onTap: () {
+    // call action
+     },
+    ), 
+   }
   }
-}
+ 
