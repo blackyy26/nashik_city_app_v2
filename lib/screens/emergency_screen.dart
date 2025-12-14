@@ -55,15 +55,16 @@ class _EmergencyTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       margin: const EdgeInsets.only(bottom: 15),
-      child:ListTile(
+     child: ListTile(
   leading: Icon(icon, color: Colors.red),
   title: Text(title),
   subtitle: Text('Call $number'),
   trailing: const Icon(Icons.call),
-  onTap: () {
-    // call action
-     },
-    ), 
-   }
-  }
- 
+  onTap: () async {
+    final Uri url = Uri.parse('tel:$number');
+    if (await canLaunchUrl(url)) {
+      await launchUrl(url);
+    }
+   },
+  ), 
+ )
