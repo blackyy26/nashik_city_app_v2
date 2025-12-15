@@ -4,6 +4,13 @@ import 'package:url_launcher/url_launcher.dart';
 class EmergencyScreen extends StatelessWidget {
   const EmergencyScreen({super.key});
 
+  Future<void> _callNumber(String number) async {
+    final Uri url = Uri(scheme: 'tel', path: number);
+    if (!await launchUrl(url, mode: LaunchMode.externalApplication)) {
+      throw 'Could not launch $number';
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -13,60 +20,25 @@ class EmergencyScreen extends StatelessWidget {
       ),
       body: ListView(
         padding: const EdgeInsets.all(16),
-        children: const [
-          _EmergencyTile(
-            title: 'Police',
-            number: '100',
-            icon: Icons.local_police,
-          ),
-          _EmergencyTile(
-            title: 'Ambulance',
-            number: '108',
-            icon: Icons.local_hospital,
-          ),
-          _EmergencyTile(
-            title: 'Fire Brigade',
-            number: '101',
-            icon: Icons.fire_truck,
-          ),
-          _EmergencyTile(
-            title: 'Women Helpline',
-            number: '181',
-            icon: Icons.woman,
-          ),
+        children: [
+          _emergencyTile('Police', '100', Icons.local_police),
+          _emergencyTile('Ambulance', '108', Icons.local_hospital),
+          _emergencyTile('Fire Brigade', '101', Icons.fire_truck),
+          _emergencyTile('Women Helpline', '181', Icons.woman),
         ],
       ),
     );
   }
-}
 
-class _EmergencyTile extends StatelessWidget {
-  final String title;
-  final String number;
-  final IconData icon;
-
-  const _EmergencyTile({
-    required this.title,
-    required this.number,
-    required this.icon,
-  });
-
-  Future<void> _callNumber() async {
-    final Uri uri = Uri(scheme: 'tel', path: number);
-    await launchUrl(uri, mode: LaunchMode.externalApplication);
-  }
-
-  @override
-  Widget build(BuildContext context) {
+  Widget _emergencyTile(String title, String number, IconData icon) {
     return Card(
-      margin: const EdgeInsets.only(bottom: 15),
       child: ListTile(
         leading: Icon(icon, color: Colors.red),
         title: Text(title),
         subtitle: Text('Call $number'),
         trailing: const Icon(Icons.call),
-        onTap: _callNumber,
+        onTap: () => _callNumber(number),
       ),
     );
   }
-}
+}b
