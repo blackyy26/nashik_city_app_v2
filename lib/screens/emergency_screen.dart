@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class EmergencyScreen extends StatelessWidget {
-  const EmergencyScreen({super.key});
+  const EmergencyScreen({Key? key}) : super(key: key);
 
   Future<void> _callNumber(String number) async {
-    final Uri url = Uri(scheme: 'tel', path: number);
-    if (!await launchUrl(url, mode: LaunchMode.externalApplication)) {
+    final Uri url = Uri.parse('tel:$number');
+    if (!await launchUrl(url)) {
       throw 'Could not launch $number';
     }
   }
@@ -32,13 +32,16 @@ class EmergencyScreen extends StatelessWidget {
 
   Widget _emergencyTile(String title, String number, IconData icon) {
     return Card(
+      margin: const EdgeInsets.only(bottom: 12),
       child: ListTile(
         leading: Icon(icon, color: Colors.red),
         title: Text(title),
         subtitle: Text('Call $number'),
         trailing: const Icon(Icons.call),
-        onTap: () => _callNumber(number),
+        onTap: () {
+          _callNumber(number);
+        },
       ),
     );
   }
-}b
+}
