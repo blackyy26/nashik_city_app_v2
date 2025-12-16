@@ -5,10 +5,15 @@ class EmergencyScreen extends StatelessWidget {
   const EmergencyScreen({Key? key}) : super(key: key);
 
   Future<void> _callNumber(String number) async {
-    final Uri url = Uri.parse('tel:$number');
-    if (!await launchUrl(url)) {
-      throw 'Could not launch $number';
-    }
+    final Uri url = Uri(
+  scheme: 'tel',
+  path: number,
+);
+
+await launchUrl(
+  url,
+  mode: LaunchMode.externalApplication,
+);
   }
 
   @override
