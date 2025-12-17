@@ -16,53 +16,71 @@ class HomeScreen extends StatelessWidget {
         crossAxisCount: 2,
         crossAxisSpacing: 16,
         mainAxisSpacing: 16,
-        children: const [
-          _HomeItem(title: 'Emergency', icon: Icons.local_hospital),
-          _HomeItem(title: 'Places', icon: Icons.place),
-          _HomeItem(title: 'Notices', icon: Icons.notifications),
-          _HomeItem(title: 'Settings', icon: Icons.settings),
+        children: [
+          HomeItem(
+            title: 'Emergency',
+            icon: Icons.local_hospital,
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const EmergencyScreen(),
+                ),
+              );
+            },
+          ),
+          HomeItem(
+            title: 'Places',
+            icon: Icons.place,
+            onTap: () {},
+          ),
+          HomeItem(
+            title: 'Notices',
+            icon: Icons.notifications,
+            onTap: () {},
+          ),
+          HomeItem(
+            title: 'Settings',
+            icon: Icons.settings,
+            onTap: () {},
+          ),
         ],
       ),
     );
   }
 }
 
-class _HomeItem extends StatelessWidget {
+class HomeItem extends StatelessWidget {
   final String title;
   final IconData icon;
+  final VoidCallback onTap;
 
-  const _HomeItem({
+  const HomeItem({
+    super.key,
     required this.title,
     required this.icon,
+    required this.onTap,
   });
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {
-        if (title == 'Emergency') {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => const EmergencyScreen(),
-            ),
-          );
-        }
-      },
+      onTap: onTap,
+      borderRadius: BorderRadius.circular(12),
       child: Container(
         decoration: BoxDecoration(
           color: Colors.blue.shade50,
-          borderRadius: BorderRadius.circular(20),
+          borderRadius: BorderRadius.circular(12),
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(icon, size: 50, color: Colors.blue),
+            Icon(icon, size: 48, color: Colors.blue),
             const SizedBox(height: 10),
             Text(
               title,
               style: const TextStyle(
-                fontSize: 18,
+                fontSize: 16,
                 fontWeight: FontWeight.bold,
               ),
             ),
