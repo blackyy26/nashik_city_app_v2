@@ -13,11 +13,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Navigation and Routing',
+      title: 'Nashik City App',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const HomeScreen(),
+      home: const HomeScreen(), //  MOST IMPORTANT
     );
   }
 }
