@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'screens/home_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -10,13 +9,26 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Nashik City App',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
+      home: HomeScreen(),
+    );
+  }
+}
+
+class HomeScreen extends StatelessWidget {
+  const HomeScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const Scaffold(
+      body: Center(
+        child: Text(
+          'NASHIK CITY APP\nOPEN SUCCESS 🎉',
+          textAlign: TextAlign.center,
+          style: TextStyle(fontSize: 20),
+        ),
       ),
-      home: const HomeScreen(),
     );
   }
 }
